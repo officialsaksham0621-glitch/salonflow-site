@@ -72,8 +72,6 @@
       padding: 0 1.5rem;
     }
 
-    /* Header / Nav */
-
     header {
       position: sticky;
       top: 0;
@@ -206,8 +204,6 @@
       font-size: 1.3rem;
       cursor: pointer;
     }
-
-    /* Hero */
 
     main {
       flex: 1;
@@ -374,8 +370,6 @@
       background: #101017;
     }
 
-    /* Sections */
-
     section {
       padding: 3.5rem 0;
     }
@@ -404,8 +398,6 @@
       font-size: 0.9rem;
       color: var(--text-muted);
     }
-
-    /* Features */
 
     .features-grid {
       display: grid;
@@ -462,8 +454,6 @@
       content: "• ";
       color: var(--gold-soft);
     }
-
-    /* Pricing */
 
     .pricing-grid {
       display: grid;
@@ -536,8 +526,6 @@
       color: var(--gold-soft);
     }
 
-    /* How it works */
-
     .how-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -549,16 +537,13 @@
       list-style: none;
       font-size: 0.86rem;
       color: var(--text-muted);
+      counter-reset: step;
     }
 
     .steps-list li {
       margin-bottom: 0.7rem;
       padding-left: 1.9rem;
       position: relative;
-    }
-
-    .steps-list strong {
-      color: var(--gold-soft);
     }
 
     .steps-list li::before {
@@ -577,8 +562,8 @@
       font-size: 0.7rem;
     }
 
-    .steps-list {
-      counter-reset: step;
+    .steps-list strong {
+      color: var(--gold-soft);
     }
 
     .panel {
@@ -596,8 +581,6 @@
       color: var(--text-main);
       margin-bottom: 0.4rem;
     }
-
-    /* Testimonials */
 
     .testimonials-grid {
       display: grid;
@@ -626,8 +609,6 @@
       color: var(--text-muted);
     }
 
-    /* FAQ */
-
     .faq-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -641,8 +622,6 @@
       margin-bottom: 0.25rem;
       color: var(--text-main);
     }
-
-    /* Contact */
 
     .contact-grid {
       display: grid;
@@ -720,8 +699,6 @@
       font-weight: 500;
     }
 
-    /* Footer */
-
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding: 1.6rem 0 1.2rem;
@@ -750,8 +727,6 @@
     .footer-links a:hover {
       color: var(--gold-soft);
     }
-
-    /* Responsive */
 
     @media (max-width: 900px) {
       .hero-grid,
@@ -827,7 +802,6 @@
 </head>
 <body>
   <div class="page">
-    <!-- Header -->
     <header>
       <div class="container nav">
         <div class="logo-wrap">
@@ -863,7 +837,6 @@
     </header>
 
     <main>
-      <!-- Hero -->
       <section class="hero" id="home">
         <div class="container hero-grid">
           <div>
@@ -937,7 +910,6 @@
         </div>
       </section>
 
-      <!-- Features -->
       <section id="features">
         <div class="container">
           <div class="section-heading">
@@ -1011,7 +983,6 @@
         </div>
       </section>
 
-      <!-- Pricing -->
       <section id="pricing">
         <div class="container">
           <div class="section-heading">
@@ -1113,7 +1084,6 @@
         </div>
       </section>
 
-      <!-- How it works -->
       <section id="how-it-works">
         <div class="container">
           <div class="section-heading">
@@ -1166,7 +1136,6 @@
         </div>
       </section>
 
-      <!-- Testimonials -->
       <section id="testimonials">
         <div class="container">
           <div class="section-heading">
@@ -1204,7 +1173,6 @@
         </div>
       </section>
 
-      <!-- FAQ -->
       <section id="faq">
         <div class="container">
           <div class="section-heading">
@@ -1268,7 +1236,7 @@
         </div>
       </section>
 
-                  <!-- Contact -->
+      <!-- Contact with working FormSubmit form -->
       <section id="contact">
         <div class="container">
           <div class="section-heading">
@@ -1285,7 +1253,6 @@
               method="POST"
               action="https://formsubmit.co/officialsaksham0621@gmail.com"
             >
-              <!-- FormSubmit configuration -->
               <input type="hidden" name="_subject" value="New SalonFlow AI Demo Lead">
               <input type="hidden" name="_captcha" value="false">
               <input
@@ -1374,11 +1341,8 @@
           </div>
         </div>
       </section>
-
-
     </main>
 
-    <!-- Footer -->
     <footer>
       <div class="container footer-inner">
         <div>© <span id="year"></span> SalonFlow AI. All rights reserved.</div>
@@ -1392,7 +1356,6 @@
   </div>
 
   <script>
-    // Mobile nav toggle
     const menuToggle = document.querySelector(".menu-toggle");
     const navMenu = document.getElementById("nav-menu");
 
@@ -1408,7 +1371,6 @@
       });
     }
 
-    // Current year
     document.getElementById("year").textContent =
       new Date().getFullYear();
   </script>
