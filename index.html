@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SalonFlow AI – AI Automation for Salons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="SalonFlow AI helps salons in India automate bookings, WhatsApp replies, Instagram DMs, follow-ups and reviews using AI."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #0f1012;
+      --bg-alt: #17181c;
+      --gold: #d3a84f;
+      --gold-soft: #f4dd9a;
+      --text-main: #f9f5ec;
+      --text-muted: #b1b1b6;
+      --accent: #ffffff;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --radius-lg: 18px;
+      --radius-full: 999px;
+      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.45);
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        sans-serif;
+      background: radial-gradient(circle at top, #252732 0, #07070a 45%);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header / Nav */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(7, 7, 10, 0.95),
+        rgba(7, 7, 10, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1.5rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 20%, #ffffff, #d3a84f 55%, #8a5e16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1b1204;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    .logo-text-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.03em;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.3rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      transition: color 0.2s ease, transform 0.15s ease;
+    }
+
+    nav a:hover {
+      color: var(--gold-soft);
+      transform: translateY(-1px);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .pill {
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.35rem 0.9rem;
+      font-size: 0.75rem;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-full);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.2s ease,
+        background 0.2s ease, opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f6df9b, #d3a84f);
+      color: #1b1204;
+      box-shadow: 0 13px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      color: var(--accent);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* Hero */
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
+      padding: 3.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-full);
+      padding: 0.25rem 0.7rem 0.25rem 0.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.35);
+      margin-bottom: 1rem;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--gold-soft);
+    }
+
+    .eyebrow-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #d3a84f);
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.3rem, 4vw, 3.1rem);
+      line-height: 1.05;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 span {
+      color: var(--gold-soft);
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta strong {
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    .hero-card {
+      border-radius: 22px;
+      padding: 1.6rem 1.5rem;
+      background: radial-gradient(circle at top left, #34313b, #101017);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .hero-card-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .metric-main {
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: var(--gold-soft);
+    }
+
+    .metric-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 160px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 0.25rem 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+    }
+
+    .tiny-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 3px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, #f4dd9a, transparent);
+      opacity: 0.7;
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-step::before {
+      content: "";
+      position: absolute;
+      left: -1.02rem;
+      top: 0.3rem;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: 1px solid var(--gold-soft);
+      background: #101017;
+    }
+
+    /* Sections */
+
+    section {
+      padding: 3.5rem 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 2.2rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Features */
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, #26222e, #101017);
+      border: 1px solid var(--card-border);
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-light {
+      background: radial-gradient(circle at top, #1b1b21, #0c0c10);
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 14px;
+      background: rgba(244, 221, 154, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-list {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .card-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .card-list li::before {
+      content: "• ";
+      color: var(--gold-soft);
+    }
+
+    /* Pricing */
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      position: relative;
+      padding: 1.6rem 1.4rem;
+      border-radius: 22px;
+      border: 1px solid var(--card-border);
+      background: radial-gradient(circle at top, #26222e, #101017);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .pricing-card.highlight {
+      border-color: rgba(244, 221, 154, 0.7);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      transform: translateY(-4px);
+    }
+
+    .pricing-pill {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .pricing-name {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pricing-price {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .pricing-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .pricing-features li {
+      margin-bottom: 0.3rem;
+      display: flex;
+      gap: 0.35rem;
+      align-items: flex-start;
+    }
+
+    .pricing-features span {
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+
+    .pricing-check {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--gold-soft);
+    }
+
+    /* How it works */
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      align-items: flex-start;
+    }
+
+    .steps-list {
+      list-style: none;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .steps-list li {
+      margin-bottom: 0.7rem;
+      padding-left: 1.9rem;
+      position: relative;
+    }
+
+    .steps-list strong {
+      color: var(--gold-soft);
+    }
+
+    .steps-list li::before {
+      content: counter(step);
+      counter-increment: step;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid var(--gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    .steps-list {
+      counter-reset: step;
+    }
+
+    .panel {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, #2b2833, #101017);
+      border: 1px solid var(--card-border);
+      padding: 1.4rem 1.3rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+
+    /* Testimonials */
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .quote-card {
+      border-radius: 18px;
+      padding: 1.1rem 1.1rem 1rem;
+      background: radial-gradient(circle at top, #24222d, #101017);
+      border: 1px solid var(--card-border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .quote-name {
+      margin-top: 0.7rem;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .quote-role {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ */
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.1rem 1.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .faq-item h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-main);
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      align-items: flex-start;
+    }
+
+    form {
+      display: grid;
+      gap: 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(4, 4, 7, 0.9);
+      padding: 0.6rem 0.75rem;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border 0.2s ease, box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold-soft);
+      box-shadow: 0 0 0 1px rgba(244, 221, 154, 0.25);
+      background: rgba(7, 7, 11, 0.95);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .contact-card {
+      border-radius: 18px;
+      padding: 1.3rem 1.2rem;
+      background: radial-gradient(circle at top, #26212d, #101017);
+      border: 1px solid var(--card-border);
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .contact-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-row {
+      margin-top: 0.5rem;
+    }
+
+    .contact-row strong {
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.6rem 0 1.2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-soft);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .features-grid,
+      .pricing-grid,
+      .how-grid,
+      .testimonials-grid,
+      .faq-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .pricing-card.highlight {
+        transform: none;
+      }
+
+      .hero {
+        padding-top: 2.7rem;
+      }
+    }
+
+    @media (max-width: 780px) {
+      nav {
+        position: relative;
+      }
+
+      nav ul {
+        position: absolute;
+        top: 110%;
+        right: 0;
+        flex-direction: column;
+        padding: 0.9rem 1rem;
+        background: rgba(4, 4, 8, 0.96);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        min-width: 200px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(6px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+      }
+
+      nav ul.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-right {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <header>
+      <div class="container nav">
+        <div class="logo-wrap">
+          <div class="logo-mark">SF</div>
+          <div>
+            <div class="logo-text-title">SalonFlow AI</div>
+            <div class="logo-text-sub">Automation for modern salons</div>
+          </div>
+        </div>
+
+        <nav>
+          <button class="menu-toggle" aria-label="Toggle navigation">
+            ☰
+          </button>
+          <ul id="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#testimonials">Results</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Demo</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-right">
+          <div class="pill">For Salons in India</div>
+          <a href="#contact" class="btn btn-primary">
+            Book Free Demo →
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">
+              <div class="eyebrow-dot"></div>
+              AI that fills your salon chairs
+            </div>
+            <h1>
+              Book more
+              <span>salon appointments</span>
+              — automatically.
+            </h1>
+            <p class="hero-sub">
+              SalonFlow AI replies to your WhatsApp &amp; Instagram messages in
+              seconds, books appointments, sends reminders and brings back
+              repeat clients — so your team can focus on giving great service.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">
+                Book a Free Demo Call
+              </a>
+              <a href="#how-it-works" class="btn btn-ghost">
+                See how it works
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <div>
+                <strong>20–40 extra bookings</strong><br />
+                per month for a typical salon.
+              </div>
+              <div>
+                <strong>24/7 instant replies</strong><br />
+                even when your staff is busy or offline.
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-title">Salon Automation Snapshot</div>
+            <div class="hero-metric-row">
+              <div class="metric-main">+63%</div>
+              <div class="metric-sub">
+                average increase in online bookings after automation.
+              </div>
+            </div>
+
+            <div class="hero-badges">
+              <div class="badge">WhatsApp &amp; Instagram</div>
+              <div class="badge">Booking automation</div>
+              <div class="badge">Review booster</div>
+            </div>
+
+            <div class="tiny-label">Your new client journey:</div>
+            <div class="timeline">
+              <div class="timeline-step">
+                Client sends “Price for facial?” on WhatsApp
+              </div>
+              <div class="timeline-step">
+                AI replies in seconds with prices &amp; open slots
+              </div>
+              <div class="timeline-step">
+                Appointment is booked &amp; added to your calendar
+              </div>
+              <div class="timeline-step">
+                Client gets reminder + follow-up + review request
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-eyebrow">Features</div>
+            <h2 class="section-title">Everything your salon needs to run on auto-pilot.</h2>
+            <p class="section-sub">
+              SalonFlow AI combines instant replies, smart booking flows,
+              follow-ups and review requests into one simple system tailored
+              for salons in India.
+            </p>
+          </div>
+
+          <div class="features-grid">
+            <div class="card">
+              <div class="card-icon">💬</div>
+              <h3 class="card-title">WhatsApp &amp; Instagram AI Assistant</h3>
+              <p class="card-body">
+                Stop missing messages. Your AI assistant answers common
+                questions, shares your price list and turns chats into
+                appointments around the clock.
+              </p>
+              <ul class="card-list">
+                <li>Instant replies in under 3 seconds</li>
+                <li>Service-wise pricing &amp; packages</li>
+                <li>Multi-language friendly</li>
+              </ul>
+            </div>
+
+            <div class="card card-light">
+              <div class="card-icon">📅</div>
+              <h3 class="card-title">Smart Booking &amp; Reminders</h3>
+              <p class="card-body">
+                AI checks your availability, books appointments and sends
+                reminders so your chairs stay full and your day stays organised.
+              </p>
+              <ul class="card-list">
+                <li>Connects with Google Calendar</li>
+                <li>24h &amp; 2h reminder messages</li>
+                <li>No more manual follow-ups</li>
+              </ul>
+            </div>
+
+            <div class="card card-light">
+              <div class="card-icon">🔁</div>
+              <h3 class="card-title">Follow-Ups &amp; Re-Engagement</h3>
+              <p class="card-body">
+                Automatically bring clients back with gentle follow-ups, offers
+                and birthday messages.
+              </p>
+              <ul class="card-list">
+                <li>Win-back offers for inactive clients</li>
+                <li>Birthday &amp; festival greetings</li>
+                <li>Upsell high-margin services</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">⭐</div>
+              <h3 class="card-title">Review Booster &amp; Insights</h3>
+              <p class="card-body">
+                Grow your Google rating with automatic review requests sent
+                after each visit.
+              </p>
+              <ul class="card-list">
+                <li>Auto-send review links post-visit</li>
+                <li>Track responses over time</li>
+                <li>Simple monthly performance report</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-eyebrow">Pricing</div>
+            <h2 class="section-title">Simple plans that pay for themselves.</h2>
+            <p class="section-sub">
+              Most salons recover their monthly SalonFlow AI cost with just
+              2–3 additional appointments per week.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+            <div class="pricing-card">
+              <div class="pricing-pill">Starter</div>
+              <h3 class="pricing-name">Starter</h3>
+              <div class="pricing-price">₹9,999<span style="font-size:0.8rem;font-weight:400;"> / month</span></div>
+              <div class="pricing-note">
+                Perfect for smaller salons getting started with automation.
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>WhatsApp AI assistant for FAQs &amp; pricing</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Instagram DM reply flows</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Basic booking form hand-off to staff</span>
+                </li>
+              </ul>
+              <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center;">
+                Start with Starter
+              </a>
+            </div>
+
+            <div class="pricing-card highlight">
+              <div class="pricing-pill">Most Popular</div>
+              <h3 class="pricing-name">Growth</h3>
+              <div class="pricing-price">₹19,999<span style="font-size:0.8rem;font-weight:400;"> / month</span></div>
+              <div class="pricing-note">
+                For busy salons that want bookings, follow-ups and reviews fully automated.
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Everything in Starter</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Full booking automation with calendar integration</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Reminder &amp; follow-up sequences</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Review booster after each visit</span>
+                </li>
+              </ul>
+              <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">
+                Book Growth Demo →
+              </a>
+            </div>
+
+            <div class="pricing-card">
+              <div class="pricing-pill">Premium</div>
+              <h3 class="pricing-name">Premium</h3>
+              <div class="pricing-price">₹34,999<span style="font-size:0.8rem;font-weight:400;"> / month</span></div>
+              <div class="pricing-note">
+                For high-end salons that want custom AI flows and detailed reporting.
+              </div>
+              <ul class="pricing-features">
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Everything in Growth</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Custom AI tuning for your brand tone</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>Advanced dashboards &amp; monthly optimisation</span>
+                </li>
+                <li>
+                  <span class="pricing-check">✔</span>
+                  <span>VIP support &amp; priority changes</span>
+                </li>
+              </ul>
+              <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center;">
+                Talk about Premium
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="how-it-works">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-eyebrow">How it works</div>
+            <h2 class="section-title">From message to booking in under a minute.</h2>
+            <p class="section-sub">
+              We customise SalonFlow AI for your services, pricing and timings.
+              Once live, every new message quietly flows through this system.
+            </p>
+          </div>
+
+          <div class="how-grid">
+            <ul class="steps-list">
+              <li>
+                <strong>Discovery call (30 minutes)</strong><br />
+                We understand your services, preferred timings, staff schedule
+                and current booking flow.
+              </li>
+              <li>
+                <strong>We set up your AI assistant</strong><br />
+                We configure WhatsApp, Instagram, your price list and booking
+                rules — usually within 3–5 days.
+              </li>
+              <li>
+                <strong>Test run with your team</strong><br />
+                We test real conversations and refine replies to match your
+                brand tone and language.
+              </li>
+              <li>
+                <strong>Go live &amp; optimise</strong><br />
+                Once live, we review results every month and keep improving your
+                flows and offers.
+              </li>
+            </ul>
+
+            <div class="panel">
+              <div class="panel-title">Example client journey</div>
+              <p>
+                1. A new client finds your salon on Instagram and sends “Do you
+                have slot for hair spa tomorrow?”<br /><br />
+                2. Your AI assistant replies instantly with available times and
+                the price.<br /><br />
+                3. The client confirms a time. The appointment is added to your
+                calendar and your team gets notified.<br /><br />
+                4. The client receives a reminder before the visit, and a review
+                link afterwards — plus a gentle offer to return next month.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-eyebrow">Results</div>
+            <h2 class="section-title">What automated salons experience.</h2>
+            <p class="section-sub">
+              These are example outcomes you can realistically expect when your
+              salon runs with AI-powered messaging and bookings.
+            </p>
+          </div>
+
+          <div class="testimonials-grid">
+            <div class="quote-card">
+              “We used to miss so many WhatsApp messages during busy hours.
+              After automation, almost every message turns into a booking or at
+              least a clear answer.”
+              <div class="quote-name">Lavish Looks Studio</div>
+              <div class="quote-role">Mid-size salon – sample result</div>
+            </div>
+
+            <div class="quote-card">
+              “Our front desk is finally relaxed. The AI handles all basic
+              questions so the team can focus on customers in the chair.”
+              <div class="quote-name">Glow &amp; Shine Salon</div>
+              <div class="quote-role">Urban salon – sample result</div>
+            </div>
+
+            <div class="quote-card">
+              “We’re now getting consistent Google reviews without asking in
+              person. Our rating went up and so did new walk-ins.”
+              <div class="quote-name">Blush Beauty Bar</div>
+              <div class="quote-role">Boutique salon – sample result</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-eyebrow">FAQ</div>
+            <h2 class="section-title">Answers to common questions.</h2>
+            <p class="section-sub">
+              Still unsure? Here are responses to the questions most salon
+              owners ask us on their first call.
+            </p>
+          </div>
+
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h4>Do we need to be “tech experts” to use this?</h4>
+              <p>
+                Not at all. We set up everything for you. Your team keeps using
+                WhatsApp, Instagram and your calendar as usual.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4>How long does setup take?</h4>
+              <p>
+                Typically 3–5 working days after our kickoff call, depending on
+                how many services and locations you have.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4>Can the AI talk in Hindi or other languages?</h4>
+              <p>
+                Yes. We can configure your assistant to reply in English,
+                Hinglish or other regional languages as needed.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4>What if a client asks something complex?</h4>
+              <p>
+                For special cases, the AI can hand over the chat to a human
+                staff member so nothing is lost.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4>Is there a minimum lock-in period?</h4>
+              <p>
+                No long-term contracts. Start with one month. If you don’t see
+                value, you can cancel any time.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4>Can you customise this for multiple branches?</h4>
+              <p>
+                Yes, we can set branch-wise timings, services and calendars so
+                each location runs smoothly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-eyebrow">Get started</div>
+            <h2 class="section-title">Book your free automation demo.</h2>
+            <p class="section-sub">
+              Share a few details and we’ll show you exactly how SalonFlow AI
+              would work for your salon — with your services and pricing.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <form
+  method="POST"
+  action="https://formsubmit.co/officialsaksham0621@gmail.com"
+>
+  <!-- FormSubmit configuration -->
+  <input type="hidden" name="_subject" value="New SalonFlow AI Demo Lead">
+  <input type="hidden" name="_captcha" value="false">
+  <!-- After submit, user will be redirected back to your homepage -->
+  <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+
+  <div>
+    <label for="name">Your name</label>
+    <input id="name" name="name" type="text" required />
+  </div>
+
+  <div>
+    <label for="salon">Salon name</label>
+    <input id="salon" name="salon" type="text" required />
+  </div>
+
+  <div>
+    <label for="city">City</label>
+    <input id="city" name="city" type="text" required />
+  </div>
+
+  <div>
+    <label for="phone">WhatsApp number</label>
+    <input
+      id="phone"
+      name="phone"
+      type="tel"
+      placeholder="+91 ..."
+      required
+    />
+  </div>
+
+  <div>
+    <label for="size">Salon size</label>
+    <select id="size" name="size">
+      <option value="small">Small – 1–3 chairs</option>
+      <option value="medium">Medium – 4–8 chairs</option>
+      <option value="large">Large – 9+ chairs</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="message">Anything we should know?</label>
+    <textarea
+      id="message"
+      name="message"
+      placeholder="For example: services you offer, busiest days, current booking issues..."
+    ></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    Request My Free Demo →
+  </button>
+
+  <div class="contact-note">
+    We’ll reach out within 1 working day with available demo
+    timings. No spam. No obligation.
+  </div>
+</form>
+
+
+            <div class="contact-card">
+              <h3>Prefer WhatsApp?</h3>
+              <p>
+                If you’d rather chat directly, send us a quick message with your
+                salon name and city. We’ll share a short video demo you can
+                watch any time.
+              </p>
+
+              <div class="contact-row">
+                <strong>WhatsApp :</strong><br />
+                +91-8287716443
+              </div>
+
+              <div class="contact-row" style="margin-top:0.7rem;">
+                <strong>Email:</strong><br />
+                officialsaksham0621@gmail.com
+              </div>
+
+              <div class="contact-row" style="margin-top:0.7rem;">
+                <strong>Service hours:</strong><br />
+                Monday – Saturday, 10:00 AM – 7:00 PM
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> SalonFlow AI. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Book demo</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("open");
+      });
+
+      navMenu.addEventListener("click", (e) => {
+        if (e.target.tagName === "A") {
+          navMenu.classList.remove("open");
+        }
+      });
+    }
+
+    // Current year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
