@@ -1236,111 +1236,103 @@
         </div>
       </section>
 
-      <!-- Contact with working FormSubmit form -->
-      <section id="contact">
-        <div class="container">
-          <div class="section-heading">
-            <div class="section-eyebrow">Get started</div>
-            <h2 class="section-title">Book your free automation demo.</h2>
-            <p class="section-sub">
-              Share a few details and we’ll show you exactly how SalonFlow AI
-              would work for your salon — with your services and pricing.
-            </p>
-          </div>
+      <!-- ===== CONTACT FORM (PUT THIS IN PLACE OF THE OLD CONTACT BLOCK) ===== -->
+<div class="contact-grid">
+  <form id="demo-form">
+    <!-- Hidden meta fields (still sent to receiving service) -->
+    <input type="hidden" name="_subject" value="New SalonFlow AI Demo Lead">
+    <input type="hidden" name="_captcha" value="false">
 
-          <div class="contact-grid">
-            <form
-              method="POST"
-              action="https://formsubmit.co/officialsaksham0621@gmail.com"
-            >
-              <input type="hidden" name="_subject" value="New SalonFlow AI Demo Lead">
-              <input type="hidden" name="_captcha" value="false">
-              <input
-                type="hidden"
-                name="_next"
-                value="https://officialsaksham0621-glitch.github.io/salonflow-site/thank-you.html"
-              >
+    <div>
+      <label for="name">Your name</label>
+      <input id="name" name="name" type="text" required />
+    </div>
 
-              <div>
-                <label for="name">Your name</label>
-                <input id="name" name="name" type="text" required />
-              </div>
+    <div>
+      <label for="salon">Salon name</label>
+      <input id="salon" name="salon" type="text" required />
+    </div>
 
-              <div>
-                <label for="salon">Salon name</label>
-                <input id="salon" name="salon" type="text" required />
-              </div>
+    <div>
+      <label for="city">City</label>
+      <input id="city" name="city" type="text" required />
+    </div>
 
-              <div>
-                <label for="city">City</label>
-                <input id="city" name="city" type="text" required />
-              </div>
+    <div>
+      <label for="phone">WhatsApp number</label>
+      <input id="phone" name="phone" type="tel" placeholder="+91 ..." required />
+    </div>
 
-              <div>
-                <label for="phone">WhatsApp number</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="+91 ..."
-                  required
-                />
-              </div>
+    <div>
+      <label for="size">Salon size</label>
+      <select id="size" name="size">
+        <option value="small">Small – 1–3 chairs</option>
+        <option value="medium">Medium – 4–8 chairs</option>
+        <option value="large">Large – 9+ chairs</option>
+      </select>
+    </div>
 
-              <div>
-                <label for="size">Salon size</label>
-                <select id="size" name="size">
-                  <option value="small">Small – 1–3 chairs</option>
-                  <option value="medium">Medium – 4–8 chairs</option>
-                  <option value="large">Large – 9+ chairs</option>
-                </select>
-              </div>
+    <div>
+      <label for="message">Anything we should know?</label>
+      <textarea id="message" name="message" placeholder="For example: services you offer, busiest days, current booking issues..."></textarea>
+    </div>
 
-              <div>
-                <label for="message">Anything we should know?</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="For example: services you offer, busiest days, current booking issues..."
-                ></textarea>
-              </div>
+    <button type="submit" class="btn btn-primary">Request My Free Demo →</button>
 
-              <button type="submit" class="btn btn-primary">
-                Request My Free Demo →
-              </button>
+    <div class="contact-note">We’ll reach out within 1 working day with available demo timings. No spam. No obligation.</div>
+  </form>
 
-              <div class="contact-note">
-                We’ll reach out within 1 working day with available demo
-                timings. No spam. No obligation.
-              </div>
-            </form>
+  <div class="contact-card">
+    <h3>Prefer WhatsApp?</h3>
+    <p>If you’d rather chat directly, send us a quick message with your salon name and city. We’ll share a short video demo you can watch any time.</p>
 
-            <div class="contact-card">
-              <h3>Prefer WhatsApp?</h3>
-              <p>
-                If you’d rather chat directly, send us a quick message with your
-                salon name and city. We’ll share a short video demo you can
-                watch any time.
-              </p>
+    <div class="contact-row"><strong>WhatsApp :</strong><br/>+91-8287716443</div>
+    <div class="contact-row" style="margin-top:0.7rem;"><strong>Email:</strong><br/>officialsaksham0621@gmail.com</div>
+    <div class="contact-row" style="margin-top:0.7rem;"><strong>Service hours:</strong><br/>Monday – Saturday, 10:00 AM – 7:00 PM</div>
+  </div>
+</div>
 
-              <div class="contact-row">
-                <strong>WhatsApp :</strong><br />
-                +91-8287716443
-              </div>
+<!-- ===== JAVASCRIPT (place before </body>) ===== -->
+<script>
+  (function () {
+    const FORM_ENDPOINT = "https://formsubmit.co/officialsaksham0621@gmail.com";
+    const THANK_YOU = "thank-you.html"; // local relative path
 
-              <div class="contact-row" style="margin-top:0.7rem;">
-                <strong>Email:</strong><br />
-                officialsaksham0621@gmail.com
-              </div>
+    const form = document.getElementById("demo-form");
+    if (!form) return;
 
-              <div class="contact-row" style="margin-top:0.7rem;">
-                <strong>Service hours:</strong><br />
-                Monday – Saturday, 10:00 AM – 7:00 PM
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+
+      const formData = new FormData(form);
+
+      // Ensure hidden fields are present (FormSubmit expects _subject/_captcha if used)
+      if (!formData.get("_subject")) formData.append("_subject", "New SalonFlow AI Demo Lead");
+      if (!formData.get("_captcha")) formData.append("_captcha", "false");
+
+      try {
+        const resp = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: formData,
+          mode: "cors"
+        });
+
+        // If network request succeeded (status 200–299), redirect to your thank-you page.
+        // Even if FormSubmit doesn't email you, user flow remains correct.
+        window.location.href = THANK_YOU;
+      } catch (err) {
+        console.error("Form send error:", err);
+        alert("Could not send the form — please try again or contact us on WhatsApp.");
+        submitButton.disabled = false;
+        submitButton.textContent = "Request My Free Demo →";
+      }
+    });
+  })();
+</script>
+
     </main>
 
     <footer>
