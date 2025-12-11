@@ -1,802 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <title>SalonFlow AI – AI Automation for Salons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="NAV.AI helps salons in India automate bookings, WhatsApp replies, Instagram DMs, follow-ups and reviews using AI."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap"
-    rel="stylesheet"
-  />
+  <meta name="description" content="SalonFlow AI automates bookings, WhatsApp replies, Instagram DMs, follow-ups and reviews for salons." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0f1012;
-      --bg-alt: #17181c;
-      --gold: #d3a84f;
-      --gold-soft: #f4dd9a;
-      --text-main: #f9f5ec;
-      --text-muted: #b1b1b6;
-      --accent: #ffffff;
-      --card-border: rgba(255, 255, 255, 0.08);
-      --radius-lg: 18px;
-      --radius-full: 999px;
-      --shadow-soft: 0 18px 50px rgba(0, 0, 0, 0.45);
-      --max-width: 1120px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
-        sans-serif;
-      background: radial-gradient(circle at top, #252732 0, #07070a 45%);
-      color: var(--text-main);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
-        to bottom,
-        rgba(7, 7, 10, 0.95),
-        rgba(7, 7, 10, 0.7),
-        transparent
-      );
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-      gap: 1.5rem;
-    }
-
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: radial-gradient(circle at 20% 20%, #ffffff, #d3a84f 55%, #8a5e16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #1b1204;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
-    }
-
-    .logo-text-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.3rem;
-      letter-spacing: 0.03em;
-    }
-
-    .logo-text-sub {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 1.3rem;
-      font-size: 0.9rem;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      transition: color 0.2s ease, transform 0.15s ease;
-    }
-
-    nav a:hover {
-      color: var(--gold-soft);
-      transform: translateY(-1px);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .pill {
-      border-radius: var(--radius-full);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.35rem 0.9rem;
-      font-size: 0.75rem;
-      color: var(--gold-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--radius-full);
-      padding: 0.6rem 1.2rem;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      gap: 0.4rem;
-      transition: transform 0.15s ease, box-shadow 0.2s ease,
-        background 0.2s ease, opacity 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #f6df9b, #d3a84f);
-      color: #1b1204;
-      box-shadow: 0 13px 30px rgba(0, 0, 0, 0.55);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.04);
-      transform: translateY(-1px);
-    }
-
-    .menu-toggle {
-      display: none;
-      border: none;
-      background: transparent;
-      color: var(--accent);
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .hero {
-      padding: 3.5rem 0 4rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      border-radius: var(--radius-full);
-      padding: 0.25rem 0.7rem 0.25rem 0.25rem;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.35);
-      margin-bottom: 1rem;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      color: var(--gold-soft);
-    }
-
-    .eyebrow-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #d3a84f);
-    }
-
-    .hero h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.3rem, 4vw, 3.1rem);
-      line-height: 1.05;
-      margin-bottom: 0.9rem;
-    }
-
-    .hero h1 span {
-      color: var(--gold-soft);
-    }
-
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin-bottom: 1.7rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      margin-bottom: 1.6rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .hero-meta strong {
-      color: var(--gold-soft);
-      font-weight: 500;
-    }
-
-    .hero-card {
-      border-radius: 22px;
-      padding: 1.6rem 1.5rem;
-      background: radial-gradient(circle at top left, #34313b, #101017);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .hero-card-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: var(--text-muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-metric-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .metric-main {
-      font-size: 2.1rem;
-      font-weight: 600;
-      color: var(--gold-soft);
-    }
-
-    .metric-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      max-width: 160px;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .badge {
-      font-size: 0.7rem;
-      border-radius: 999px;
-      padding: 0.25rem 0.8rem;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: var(--text-muted);
-    }
-
-    .tiny-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .timeline {
-      position: relative;
-      padding-left: 1.4rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 6px;
-      top: 3px;
-      bottom: 4px;
-      width: 2px;
-      background: linear-gradient(to bottom, #f4dd9a, transparent);
-      opacity: 0.7;
-    }
-
-    .timeline-step {
-      position: relative;
-      margin-bottom: 0.4rem;
-    }
-
-    .timeline-step::before {
-      content: "";
-      position: absolute;
-      left: -1.02rem;
-      top: 0.3rem;
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      border: 1px solid var(--gold-soft);
-      background: #101017;
-    }
-
-    section {
-      padding: 3.5rem 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 620px;
-      margin: 0 auto 2.2rem;
-    }
-
-    .section-eyebrow {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.9rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .section-sub {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top, #26222e, #101017);
-      border: 1px solid var(--card-border);
-      padding: 1.4rem 1.3rem;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-    }
-
-    .card-light {
-      background: radial-gradient(circle at top, #1b1b21, #0c0c10);
-    }
-
-    .card-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 14px;
-      background: rgba(244, 221, 154, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .card-body {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .card-list {
-      list-style: none;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .card-list li {
-      margin-bottom: 0.25rem;
-    }
-
-    .card-list li::before {
-      content: "• ";
-      color: var(--gold-soft);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    .pricing-card {
-      position: relative;
-      padding: 1.6rem 1.4rem;
-      border-radius: 22px;
-      border: 1px solid var(--card-border);
-      background: radial-gradient(circle at top, #26222e, #101017);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .pricing-card.highlight {
-      border-color: rgba(244, 221, 154, 0.7);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
-      transform: translateY(-4px);
-    }
-
-    .pricing-pill {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--gold-soft);
-      margin-bottom: 0.4rem;
-    }
-
-    .pricing-name {
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .pricing-price {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .pricing-note {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 0.8rem;
-    }
-
-    .pricing-features {
-      list-style: none;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 0.9rem;
-    }
-
-    .pricing-features li {
-      margin-bottom: 0.3rem;
-      display: flex;
-      gap: 0.35rem;
-      align-items: flex-start;
-    }
-
-    .pricing-features span {
-      font-size: 0.9rem;
-      line-height: 1.3;
-    }
-
-    .pricing-check {
-      margin-top: 4px;
-      font-size: 0.8rem;
-      color: var(--gold-soft);
-    }
-
-    .how-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 1.8rem;
-      align-items: flex-start;
-    }
-
-    .steps-list {
-      list-style: none;
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      counter-reset: step;
-    }
-
-    .steps-list li {
-      margin-bottom: 0.7rem;
-      padding-left: 1.9rem;
-      position: relative;
-    }
-
-    .steps-list li::before {
-      content: counter(step);
-      counter-increment: step;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      border: 1px solid var(--gold-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-    }
-
-    .steps-list strong {
-      color: var(--gold-soft);
-    }
-
-    .panel {
-      border-radius: 20px;
-      background: radial-gradient(circle at top left, #2b2833, #101017);
-      border: 1px solid var(--card-border);
-      padding: 1.4rem 1.3rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .panel-title {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.4rem;
-    }
-
-    .quote-card {
-      border-radius: 18px;
-      padding: 1.1rem 1.1rem 1rem;
-      background: radial-gradient(circle at top, #24222d, #101017);
-      border: 1px solid var(--card-border);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .quote-name {
-      margin-top: 0.7rem;
-      font-size: 0.85rem;
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .quote-role {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.1rem 1.6rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .faq-item h4 {
-      font-size: 0.95rem;
-      margin-bottom: 0.25rem;
-      color: var(--text-main);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 1.8rem;
-      align-items: flex-start;
-    }
-
-    form {
-      display: grid;
-      gap: 0.8rem;
-      font-size: 0.85rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.15rem;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      border-radius: 11px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(4, 4, 7, 0.9);
-      padding: 0.6rem 0.75rem;
-      color: var(--text-main);
-      font-family: inherit;
-      font-size: 0.85rem;
-      outline: none;
-      transition: border 0.2s ease, box-shadow 0.2s ease,
-        background 0.2s ease;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--gold-soft);
-      box-shadow: 0 0 0 1px rgba(244, 221, 154, 0.25);
-      background: rgba(7, 7, 11, 0.95);
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .contact-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.4rem;
-    }
-
-    .contact-card {
-      border-radius: 18px;
-      padding: 1.3rem 1.2rem;
-      background: radial-gradient(circle at top, #26212d, #101017);
-      border: 1px solid var(--card-border);
-      font-size: 0.84rem;
-      color: var(--text-muted);
-    }
-
-    .contact-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .contact-row {
-      margin-top: 0.5rem;
-    }
-
-    .contact-row strong {
-      color: var(--gold-soft);
-      font-weight: 500;
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 1.6rem 0 1.2rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-    }
-
-    .footer-links a:hover {
-      color: var(--gold-soft);
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .features-grid,
-      .pricing-grid,
-      .how-grid,
-      .testimonials-grid,
-      .faq-grid,
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .pricing-card.highlight {
-        transform: none;
-      }
-
-      .hero {
-        padding-top: 2.7rem;
-      }
-    }
-
-    @media (max-width: 780px) {
-      nav {
-        position: relative;
-      }
-
-      nav ul {
-        position: absolute;
-        top: 110%;
-        right: 0;
-        flex-direction: column;
-        padding: 0.9rem 1rem;
-        background: rgba(4, 4, 8, 0.96);
-        border-radius: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        min-width: 200px;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(6px);
-        transition: opacity 0.18s ease, transform 0.18s ease;
-      }
-
-      nav ul.open {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-      }
-
-      .nav-right {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .hero-meta {
-        flex-direction: column;
-      }
-
-      .section-title {
-        font-size: 1.6rem;
-      }
+    :root{
+      --gold:#d3a84f;--gold-soft:#f4dd9a;--bg:#07070a;--text:#f9f5ec;--muted:#b1b1b6;
+      --card:#101017;--radius:14px;--maxw:1120px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Poppins",sans-serif;background:radial-gradient(circle at top,#252732,#07070a);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
+    header{position:sticky;top:0;background:linear-gradient(to bottom,rgba(7,7,10,0.95),rgba(7,7,10,0.7));border-bottom:1px solid rgba(255,255,255,0.04);z-index:60}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+    .logo{display:flex;gap:.6rem;align-items:center}
+    .logo-mark{width:36px;height:36px;border-radius:10px;background:radial-gradient(circle at 20% 20%,#fff,var(--gold) 55%);display:flex;align-items:center;justify-content:center;font-weight:700;color:#1b1204}
+    .logo-title{font-family:"Playfair Display",serif;font-size:1.2rem}
+    nav ul{display:flex;gap:1.2rem;list-style:none}
+    .nav-right{display:flex;gap:.8rem;align-items:center}
+    .pill{padding:.25rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,0.08);color:var(--gold-soft);font-size:.75rem}
+    .btn{border-radius:999px;padding:.55rem 1.05rem;font-weight:500;cursor:pointer;border:none}
+    .btn-primary{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#1b1204}
+    .hero{padding:3.5rem 0 4rem}
+    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2.6rem;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:.6rem;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,0.08);background:rgba(0,0,0,.25);color:var(--gold-soft);font-size:.82rem;margin-bottom:.9rem}
+    h1{font-family:"Playfair Display",serif;font-size:clamp(2.1rem,4vw,3rem);line-height:1.05;margin-bottom:.6rem}
+    .hero-sub{color:var(--muted);max-width:520px;margin-bottom:1.2rem}
+    .hero-actions{display:flex;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap}
+    .hero-card{background:linear-gradient(180deg,#2b2833,#101017);padding:1.4rem;border-radius:16px;border:1px solid rgba(255,255,255,0.06)}
+    section{padding:3rem 0}
+    .section-heading{text-align:center;margin-bottom:1.6rem}
+    .section-title{font-family:"Playfair Display",serif;font-size:1.8rem;margin-bottom:.4rem}
+    .section-sub{color:var(--muted);max-width:720px;margin:0 auto}
+    .features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .card{background:radial-gradient(circle at top,#26222e,#101017);padding:1.1rem;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .pricing-card{padding:1.4rem;border-radius:16px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg,#2a2630,#0f0f12)}
+    .pricing-card.highlight{transform:translateY(-6px);border-color:rgba(244,221,154,0.6)}
+    .how-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:1.4rem}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start}
+    form{display:grid;gap:.8rem}
+    label{display:block;font-size:.88rem;margin-bottom:.18rem}
+    input,textarea,select{width:100%;padding:.6rem .75rem;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(6,6,8,0.9);color:var(--text)}
+    textarea{min-height:110px;resize:vertical}
+    .contact-note{color:var(--muted);font-size:.85rem;margin-top:.4rem}
+    .contact-card{background:linear-gradient(180deg,#2b2833,#101017);padding:1.1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    footer{border-top:1px solid rgba(255,255,255,0.06);padding:1.2rem 0;color:var(--muted);font-size:.86rem}
+    @media(max-width:900px){
+      .hero-grid,.features-grid,.pricing-grid,.how-grid,.testimonials-grid,.faq-grid,.contact-grid{grid-template-columns:1fr}
+      .nav-right{display:none}
     }
   </style>
 </head>
@@ -804,567 +62,313 @@
   <div class="page">
     <header>
       <div class="container nav">
-        <div class="logo-wrap">
+        <div class="logo">
           <div class="logo-mark">SF</div>
           <div>
-            <div class="logo-text-title">SalonFlow AI</div>
-            <div class="logo-text-sub">Automation for modern salons</div>
+            <div class="logo-title">SalonFlow AI</div>
+            <div style="font-size:.75rem;color:var(--muted)">Automation for modern salons</div>
           </div>
         </div>
 
         <nav>
-          <button class="menu-toggle" aria-label="Toggle navigation">
-            ☰
-          </button>
           <ul id="nav-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#how-it-works">How it works</a></li>
-            <li><a href="#testimonials">Results</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Demo</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#home">Home</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#features">Features</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#pricing">Pricing</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#how-it-works">How it works</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#testimonials">Results</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#faq">FAQ</a></li>
+            <li><a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#contact">Demo</a></li>
           </ul>
         </nav>
 
         <div class="nav-right">
           <div class="pill">For Salons in India</div>
-          <a href="#contact" class="btn btn-primary">
-            Book Free Demo →
-          </a>
+          <a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#contact" class="btn btn-primary">Book Free Demo →</a>
         </div>
       </div>
     </header>
 
     <main>
+      <!-- HERO -->
       <section class="hero" id="home">
         <div class="container hero-grid">
           <div>
-            <div class="eyebrow">
-              <div class="eyebrow-dot"></div>
-              AI that fills your salon chairs
-            </div>
-            <h1>
-              Book more
-              <span>salon appointments</span>
-              — automatically.
-            </h1>
-            <p class="hero-sub">
-              SalonFlow AI replies to your WhatsApp &amp; Instagram messages in
-              seconds, books appointments, sends reminders and brings back
-              repeat clients — so your team can focus on giving great service.
-            </p>
+            <div class="eyebrow">AI that fills your salon chairs</div>
+            <h1>Book more <span style="color:var(--gold-soft)">salon appointments</span> — automatically.</h1>
+            <p class="hero-sub">SalonFlow AI replies to WhatsApp & Instagram messages in seconds, books appointments, sends reminders and brings clients back — so your team focuses on service.</p>
 
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">
-                Book a Free Demo Call
-              </a>
-              <a href="#how-it-works" class="btn btn-ghost">
-                See how it works
-              </a>
+              <a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#contact" class="btn btn-primary">Book a Free Demo Call</a>
+              <a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#how-it-works" class="btn" style="border:1px solid rgba(255,255,255,0.06);">See how it works</a>
             </div>
 
-            <div class="hero-meta">
-              <div>
-                <strong>20–40 extra bookings</strong><br />
-                per month for a typical salon.
-              </div>
-              <div>
-                <strong>24/7 instant replies</strong><br />
-                even when your staff is busy or offline.
-              </div>
+            <div style="display:flex;gap:1.2rem;color:var(--muted);font-size:.92rem">
+              <div><strong style="color:var(--gold-soft)">20–40 extra bookings</strong><br/>per month for a typical salon</div>
+              <div><strong style="color:var(--gold-soft)">24/7 replies</strong><br/>even when staff is busy</div>
             </div>
           </div>
 
           <div class="hero-card">
-            <div class="hero-card-title">Salon Automation Snapshot</div>
-            <div class="hero-metric-row">
-              <div class="metric-main">+63%</div>
-              <div class="metric-sub">
-                average increase in online bookings after automation.
-              </div>
+            <div style="font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.6rem">Salon Automation Snapshot</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem">
+              <div style="font-size:2rem;color:var(--gold-soft);font-weight:600">+63%</div>
+              <div style="color:var(--muted);max-width:160px">avg increase in online bookings after automation</div>
             </div>
-
-            <div class="hero-badges">
-              <div class="badge">WhatsApp &amp; Instagram</div>
-              <div class="badge">Booking automation</div>
-              <div class="badge">Review booster</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem">
+              <div style="font-size:.72rem;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,0.06)">WhatsApp & Instagram</div>
+              <div style="font-size:.72rem;padding:.25rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,0.06)">Booking automation</div>
             </div>
-
-            <div class="tiny-label">Your new client journey:</div>
-            <div class="timeline">
-              <div class="timeline-step">
-                Client sends “Price for facial?” on WhatsApp
-              </div>
-              <div class="timeline-step">
-                AI replies in seconds with prices &amp; open slots
-              </div>
-              <div class="timeline-step">
-                Appointment is booked &amp; added to your calendar
-              </div>
-              <div class="timeline-step">
-                Client gets reminder + follow-up + review request
-              </div>
+            <div style="color:var(--muted);font-size:.86rem">
+              <div style="margin-bottom:.5rem"><strong style="color:var(--gold-soft)">Your new client journey:</strong></div>
+              <ol style="padding-left:1.1rem;color:var(--muted);margin:0">
+                <li>Client messages asking price/slots</li>
+                <li>AI replies with prices & availability</li>
+                <li>Appointment is booked and added to calendar</li>
+                <li>Reminders & review request sent</li>
+              </ol>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- FEATURES -->
       <section id="features">
         <div class="container">
           <div class="section-heading">
-            <div class="section-eyebrow">Features</div>
-            <h2 class="section-title">Everything your salon needs to run on auto-pilot.</h2>
-            <p class="section-sub">
-              SalonFlow AI combines instant replies, smart booking flows,
-              follow-ups and review requests into one simple system tailored
-              for salons in India.
-            </p>
+            <div class="section-title">Everything your salon needs to run on auto-pilot.</div>
+            <p class="section-sub">WhatsApp + Instagram automation, booking flows, follow-ups and review boosters — tailored for Indian salons.</p>
           </div>
 
           <div class="features-grid">
             <div class="card">
-              <div class="card-icon">💬</div>
-              <h3 class="card-title">WhatsApp &amp; Instagram AI Assistant</h3>
-              <p class="card-body">
-                Stop missing messages. Your AI assistant answers common
-                questions, shares your price list and turns chats into
-                appointments around the clock.
-              </p>
-              <ul class="card-list">
-                <li>Instant replies in under 3 seconds</li>
-                <li>Service-wise pricing &amp; packages</li>
-                <li>Multi-language friendly</li>
-              </ul>
+              <div style="font-size:1.1rem;margin-bottom:.5rem">💬 WhatsApp & Instagram AI Assistant</div>
+              <p style="color:var(--muted)">Answers FAQs, sends price lists and converts chats into bookings automatically.</p>
             </div>
-
-            <div class="card card-light">
-              <div class="card-icon">📅</div>
-              <h3 class="card-title">Smart Booking &amp; Reminders</h3>
-              <p class="card-body">
-                AI checks your availability, books appointments and sends
-                reminders so your chairs stay full and your day stays organised.
-              </p>
-              <ul class="card-list">
-                <li>Connects with Google Calendar</li>
-                <li>24h &amp; 2h reminder messages</li>
-                <li>No more manual follow-ups</li>
-              </ul>
-            </div>
-
-            <div class="card card-light">
-              <div class="card-icon">🔁</div>
-              <h3 class="card-title">Follow-Ups &amp; Re-Engagement</h3>
-              <p class="card-body">
-                Automatically bring clients back with gentle follow-ups, offers
-                and birthday messages.
-              </p>
-              <ul class="card-list">
-                <li>Win-back offers for inactive clients</li>
-                <li>Birthday &amp; festival greetings</li>
-                <li>Upsell high-margin services</li>
-              </ul>
-            </div>
-
             <div class="card">
-              <div class="card-icon">⭐</div>
-              <h3 class="card-title">Review Booster &amp; Insights</h3>
-              <p class="card-body">
-                Grow your Google rating with automatic review requests sent
-                after each visit.
-              </p>
-              <ul class="card-list">
-                <li>Auto-send review links post-visit</li>
-                <li>Track responses over time</li>
-                <li>Simple monthly performance report</li>
-              </ul>
+              <div style="font-size:1.1rem;margin-bottom:.5rem">📅 Smart Booking & Reminders</div>
+              <p style="color:var(--muted)">Calendar integrations, reminders, and less no-shows.</p>
+            </div>
+            <div class="card">
+              <div style="font-size:1.1rem;margin-bottom:.5rem">🔁 Follow-ups & Re-Engagement</div>
+              <p style="color:var(--muted)">Win-back offers and birthday messages to bring customers back.</p>
+            </div>
+            <div class="card">
+              <div style="font-size:1.1rem;margin-bottom:.5rem">⭐ Review Booster</div>
+              <p style="color:var(--muted)">Automated review requests after each visit.</p>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- PRICING -->
       <section id="pricing">
         <div class="container">
           <div class="section-heading">
-            <div class="section-eyebrow">Pricing</div>
-            <h2 class="section-title">Simple plans that pay for themselves.</h2>
-            <p class="section-sub">
-              Most salons recover their monthly SalonFlow AI cost with just
-              2–3 additional appointments per week.
-            </p>
+            <div class="section-title">Simple plans that pay for themselves.</div>
+            <p class="section-sub">Most salons recover their monthly cost with 2–3 extra appointments per week.</p>
           </div>
 
           <div class="pricing-grid">
             <div class="pricing-card">
-              <div class="pricing-pill">Starter</div>
-              <h3 class="pricing-name">Starter</h3>
-              <div class="pricing-price">₹9,999<span style="font-size:0.8rem;font-weight:400;"> / month</span></div>
-              <div class="pricing-note">
-                Perfect for smaller salons getting started with automation.
-              </div>
-              <ul class="pricing-features">
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>WhatsApp AI assistant for FAQs &amp; pricing</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Instagram DM reply flows</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Basic booking form hand-off to staff</span>
-                </li>
-              </ul>
-              <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center;">
-                Start with Starter
-              </a>
+              <div style="font-size:.75rem;color:var(--gold-soft);text-transform:uppercase">Starter</div>
+              <div style="font-size:1.15rem;font-weight:600;margin:6px 0">₹9,999 / month</div>
+              <p style="color:var(--muted)">WhatsApp AI, Instagram replies, basic booking handoff.</p>
             </div>
-
             <div class="pricing-card highlight">
-              <div class="pricing-pill">Most Popular</div>
-              <h3 class="pricing-name">Growth</h3>
-              <div class="pricing-price">₹19,999<span style="font-size:0.8rem;font-weight:400;"> / month</span></div>
-              <div class="pricing-note">
-                For busy salons that want bookings, follow-ups and reviews fully automated.
-              </div>
-              <ul class="pricing-features">
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Everything in Starter</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Full booking automation with calendar integration</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Reminder &amp; follow-up sequences</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Review booster after each visit</span>
-                </li>
-              </ul>
-              <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">
-                Book Growth Demo →
-              </a>
+              <div style="font-size:.75rem;color:var(--gold-soft);text-transform:uppercase">Growth</div>
+              <div style="font-size:1.15rem;font-weight:600;margin:6px 0">₹19,999 / month</div>
+              <p style="color:var(--muted)">Full booking automation, reminders, review booster.</p>
             </div>
-
             <div class="pricing-card">
-              <div class="pricing-pill">Premium</div>
-              <h3 class="pricing-name">Premium</h3>
-              <div class="pricing-price">₹34,999<span style="font-size:0.8rem;font-weight:400;"> / month</span></div>
-              <div class="pricing-note">
-                For high-end salons that want custom AI flows and detailed reporting.
-              </div>
-              <ul class="pricing-features">
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Everything in Growth</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Custom AI tuning for your brand tone</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>Advanced dashboards &amp; monthly optimisation</span>
-                </li>
-                <li>
-                  <span class="pricing-check">✔</span>
-                  <span>VIP support &amp; priority changes</span>
-                </li>
-              </ul>
-              <a href="#contact" class="btn btn-ghost" style="width:100%;justify-content:center;">
-                Talk about Premium
-              </a>
+              <div style="font-size:.75rem;color:var(--gold-soft);text-transform:uppercase">Premium</div>
+              <div style="font-size:1.15rem;font-weight:600;margin:6px 0">₹34,999 / month</div>
+              <p style="color:var(--muted)">Custom AI tuning, dashboards, VIP support.</p>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- HOW IT WORKS -->
       <section id="how-it-works">
         <div class="container">
           <div class="section-heading">
-            <div class="section-eyebrow">How it works</div>
-            <h2 class="section-title">From message to booking in under a minute.</h2>
-            <p class="section-sub">
-              We customise SalonFlow AI for your services, pricing and timings.
-              Once live, every new message quietly flows through this system.
-            </p>
+            <div class="section-title">From message to booking in under a minute.</div>
+            <p class="section-sub">We configure your messages, services and calendar — then automate the rest.</p>
           </div>
 
           <div class="how-grid">
-            <ul class="steps-list">
-              <li>
-                <strong>Discovery call (30 minutes)</strong><br />
-                We understand your services, preferred timings, staff schedule
-                and current booking flow.
-              </li>
-              <li>
-                <strong>We set up your AI assistant</strong><br />
-                We configure WhatsApp, Instagram, your price list and booking
-                rules — usually within 3–5 days.
-              </li>
-              <li>
-                <strong>Test run with your team</strong><br />
-                We test real conversations and refine replies to match your
-                brand tone and language.
-              </li>
-              <li>
-                <strong>Go live &amp; optimise</strong><br />
-                Once live, we review results every month and keep improving your
-                flows and offers.
-              </li>
-            </ul>
-
-            <div class="panel">
-              <div class="panel-title">Example client journey</div>
-              <p>
-                1. A new client finds your salon on Instagram and sends “Do you
-                have slot for hair spa tomorrow?”<br /><br />
-                2. Your AI assistant replies instantly with available times and
-                the price.<br /><br />
-                3. The client confirms a time. The appointment is added to your
-                calendar and your team gets notified.<br /><br />
-                4. The client receives a reminder before the visit, and a review
-                link afterwards — plus a gentle offer to return next month.
-              </p>
+            <ol style="list-style:none;padding-left:0">
+              <li style="margin-bottom:.8rem"><strong>Discovery call (30 min)</strong><div style="color:var(--muted)">We learn your services, timings & staff schedule.</div></li>
+              <li style="margin-bottom:.8rem"><strong>Setup</strong><div style="color:var(--muted)">Configure WhatsApp, Instagram and booking rules (3–5 days).</div></li>
+              <li style="margin-bottom:.8rem"><strong>Test run</strong><div style="color:var(--muted)">We test conversations and refine tone.</div></li>
+              <li style="margin-bottom:.8rem"><strong>Go live</strong><div style="color:var(--muted)">We monitor & optimise monthly.</div></li>
+            </ol>
+            <div class="contact-card">
+              <div style="font-weight:600;margin-bottom:.4rem">Example client journey</div>
+              <div style="color:var(--muted)">Client asks for slots → AI replies → appointment booked → reminder + review request → client returns.</div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- TESTIMONIALS -->
       <section id="testimonials">
         <div class="container">
           <div class="section-heading">
-            <div class="section-eyebrow">Results</div>
-            <h2 class="section-title">What automated salons experience.</h2>
-            <p class="section-sub">
-              These are example outcomes you can realistically expect when your
-              salon runs with AI-powered messaging and bookings.
-            </p>
+            <div class="section-title">What automated salons experience</div>
+            <p class="section-sub">Sample results from salons that used automation.</p>
           </div>
 
           <div class="testimonials-grid">
-            <div class="quote-card">
-              “We used to miss so many WhatsApp messages during busy hours.
-              After automation, almost every message turns into a booking or at
-              least a clear answer.”
-              <div class="quote-name">Lavish Looks Studio</div>
-              <div class="quote-role">Mid-size salon – sample result</div>
-            </div>
-
-            <div class="quote-card">
-              “Our front desk is finally relaxed. The AI handles all basic
-              questions so the team can focus on customers in the chair.”
-              <div class="quote-name">Glow &amp; Shine Salon</div>
-              <div class="quote-role">Urban salon – sample result</div>
-            </div>
-
-            <div class="quote-card">
-              “We’re now getting consistent Google reviews without asking in
-              person. Our rating went up and so did new walk-ins.”
-              <div class="quote-name">Blush Beauty Bar</div>
-              <div class="quote-role">Boutique salon – sample result</div>
-            </div>
+            <div class="card">“We used to miss many WhatsApp messages — automation fixed that.”<div style="margin-top:.6rem;font-weight:600">Lavish Looks Studio</div></div>
+            <div class="card">“Front desk is relaxed; the AI handles FAQs.”<div style="margin-top:.6rem;font-weight:600">Glow & Shine Salon</div></div>
+            <div class="card">“Our Google rating improved as reviews increased.”<div style="margin-top:.6rem;font-weight:600">Blush Beauty Bar</div></div>
           </div>
         </div>
       </section>
 
+      <!-- FAQ -->
       <section id="faq">
         <div class="container">
           <div class="section-heading">
-            <div class="section-eyebrow">FAQ</div>
-            <h2 class="section-title">Answers to common questions.</h2>
-            <p class="section-sub">
-              Still unsure? Here are responses to the questions most salon
-              owners ask us on their first call.
-            </p>
+            <div class="section-title">FAQ</div>
+            <p class="section-sub">Answers to common questions from salon owners.</p>
           </div>
 
           <div class="faq-grid">
-            <div class="faq-item">
-              <h4>Do we need to be “tech experts” to use this?</h4>
-              <p>
-                Not at all. We set up everything for you. Your team keeps using
-                WhatsApp, Instagram and your calendar as usual.
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <h4>How long does setup take?</h4>
-              <p>
-                Typically 3–5 working days after our kickoff call, depending on
-                how many services and locations you have.
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <h4>Can the AI talk in Hindi or other languages?</h4>
-              <p>
-                Yes. We can configure your assistant to reply in English,
-                Hinglish or other regional languages as needed.
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <h4>What if a client asks something complex?</h4>
-              <p>
-                For special cases, the AI can hand over the chat to a human
-                staff member so nothing is lost.
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <h4>Is there a minimum lock-in period?</h4>
-              <p>
-                No long-term contracts. Start with one month. If you don’t see
-                value, you can cancel any time.
-              </p>
-            </div>
-
-            <div class="faq-item">
-              <h4>Can you customise this for multiple branches?</h4>
-              <p>
-                Yes, we can set branch-wise timings, services and calendars so
-                each location runs smoothly.
-              </p>
-            </div>
+            <div class="card"><strong>Do we need to be tech experts?</strong><div style="color:var(--muted)">No — we set everything up.</div></div>
+            <div class="card"><strong>How long does setup take?</strong><div style="color:var(--muted)">3–5 working days.</div></div>
+            <div class="card"><strong>Languages?</strong><div style="color:var(--muted)">English, Hinglish & regional languages supported.</div></div>
+            <div class="card"><strong>Multiple branches?</strong><div style="color:var(--muted)">Yes — branch-wise timings & calendars.</div></div>
           </div>
         </div>
       </section>
 
-      <!-- ===== CONTACT FORM (PUT THIS IN PLACE OF THE OLD CONTACT BLOCK) ===== -->
-<div class="contact-grid">
-  <form id="demo-form">
-    <!-- Hidden meta fields (still sent to receiving service) -->
-    <input type="hidden" name="_subject" value="New SalonFlow AI Demo Lead">
-    <input type="hidden" name="_captcha" value="false">
+      <!-- CONTACT (working form + background send) -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-heading">
+            <div class="section-title">Book your free automation demo</div>
+            <p class="section-sub">Share a few details and we’ll show you how SalonFlow AI would work for your salon.</p>
+          </div>
 
-    <div>
-      <label for="name">Your name</label>
-      <input id="name" name="name" type="text" required />
-    </div>
+          <!-- ===== CONTACT GRID (REPLACE YOUR OLD CONTACT BLOCK WITH THIS) ===== -->
+          <div class="contact-grid">
+            <form id="demo-form">
+              <!-- hidden meta fields (sent to FormSubmit) -->
+              <input type="hidden" name="_subject" value="New SalonFlow AI Demo Lead">
+              <input type="hidden" name="_captcha" value="false">
 
-    <div>
-      <label for="salon">Salon name</label>
-      <input id="salon" name="salon" type="text" required />
-    </div>
+              <div>
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" required />
+              </div>
 
-    <div>
-      <label for="city">City</label>
-      <input id="city" name="city" type="text" required />
-    </div>
+              <div>
+                <label for="salon">Salon name</label>
+                <input id="salon" name="salon" type="text" required />
+              </div>
 
-    <div>
-      <label for="phone">WhatsApp number</label>
-      <input id="phone" name="phone" type="tel" placeholder="+91 ..." required />
-    </div>
+              <div>
+                <label for="city">City</label>
+                <input id="city" name="city" type="text" required />
+              </div>
 
-    <div>
-      <label for="size">Salon size</label>
-      <select id="size" name="size">
-        <option value="small">Small – 1–3 chairs</option>
-        <option value="medium">Medium – 4–8 chairs</option>
-        <option value="large">Large – 9+ chairs</option>
-      </select>
-    </div>
+              <div>
+                <label for="phone">WhatsApp number</label>
+                <input id="phone" name="phone" type="tel" placeholder="+91 ..." required />
+              </div>
 
-    <div>
-      <label for="message">Anything we should know?</label>
-      <textarea id="message" name="message" placeholder="For example: services you offer, busiest days, current booking issues..."></textarea>
-    </div>
+              <div>
+                <label for="size">Salon size</label>
+                <select id="size" name="size">
+                  <option value="small">Small – 1–3 chairs</option>
+                  <option value="medium">Medium – 4–8 chairs</option>
+                  <option value="large">Large – 9+ chairs</option>
+                </select>
+              </div>
 
-    <button type="submit" class="btn btn-primary">Request My Free Demo →</button>
+              <div>
+                <label for="message">Anything we should know?</label>
+                <textarea id="message" name="message" placeholder="For example: services you offer, busiest days, current booking issues..."></textarea>
+              </div>
 
-    <div class="contact-note">We’ll reach out within 1 working day with available demo timings. No spam. No obligation.</div>
-  </form>
+              <button type="submit" class="btn btn-primary">Request My Free Demo →</button>
+              <div class="contact-note">We’ll reach out within 1 working day with available demo timings. No spam. No obligation.</div>
+            </form>
 
-  <div class="contact-card">
-    <h3>Prefer WhatsApp?</h3>
-    <p>If you’d rather chat directly, send us a quick message with your salon name and city. We’ll share a short video demo you can watch any time.</p>
-
-    <div class="contact-row"><strong>WhatsApp :</strong><br/>+91-8287716443</div>
-    <div class="contact-row" style="margin-top:0.7rem;"><strong>Email:</strong><br/>officialsaksham0621@gmail.com</div>
-    <div class="contact-row" style="margin-top:0.7rem;"><strong>Service hours:</strong><br/>Monday – Saturday, 10:00 AM – 7:00 PM</div>
-  </div>
-</div>
-
-<!-- ===== JAVASCRIPT (place before </body>) ===== -->
-<script>
-  (function () {
-    const FORM_ENDPOINT = "https://formsubmit.co/officialsaksham0621@gmail.com";
-    const THANK_YOU = "thank-you.html"; // local relative path
-
-    const form = document.getElementById("demo-form");
-    if (!form) return;
-
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const submitButton = form.querySelector('button[type="submit"]');
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
-
-      const formData = new FormData(form);
-
-      // Ensure hidden fields are present (FormSubmit expects _subject/_captcha if used)
-      if (!formData.get("_subject")) formData.append("_subject", "New SalonFlow AI Demo Lead");
-      if (!formData.get("_captcha")) formData.append("_captcha", "false");
-
-      try {
-        const resp = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          body: formData,
-          mode: "cors"
-        });
-
-        // If network request succeeded (status 200–299), redirect to your thank-you page.
-        // Even if FormSubmit doesn't email you, user flow remains correct.
-        window.location.href = THANK_YOU;
-      } catch (err) {
-        console.error("Form send error:", err);
-        alert("Could not send the form — please try again or contact us on WhatsApp.");
-        submitButton.disabled = false;
-        submitButton.textContent = "Request My Free Demo →";
-      }
-    });
-  })();
-</script>
-
+            <div class="contact-card">
+              <h3>Prefer WhatsApp?</h3>
+              <p>If you’d rather chat directly, message us with your salon name and city — we’ll share a short video demo.</p>
+              <div style="margin-top:.6rem"><strong>WhatsApp:</strong><br/>+91-8287716443</div>
+              <div style="margin-top:.6rem"><strong>Email:</strong><br/>officialsaksham0621@gmail.com</div>
+              <div style="margin-top:.6rem"><strong>Service hours:</strong><br/>Mon–Sat, 10:00 AM – 7:00 PM</div>
+            </div>
+          </div>
+          <!-- ===== END CONTACT GRID ===== -->
+        </div>
+      </section>
     </main>
 
     <footer>
-      <div class="container footer-inner">
+      <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
         <div>© <span id="year"></span> SalonFlow AI. All rights reserved.</div>
-        <div class="footer-links">
-          <a href="#home">Home</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Book demo</a>
+        <div style="display:flex;gap:1rem">
+          <a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#home">Home</a>
+          <a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#pricing">Pricing</a>
+          <a href="https://officialsaksham0621-glitch.github.io/salonflow-site/#contact">Book demo</a>
         </div>
       </div>
     </footer>
   </div>
 
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.getElementById("nav-menu");
+    // Header menu toggle (keeps nav safe on small screens)
+    (function(){
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      if(menuToggle && navMenu){
+        menuToggle.addEventListener('click',()=>navMenu.classList.toggle('open'));
+      }
+    })();
 
-    if (menuToggle && navMenu) {
-      menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("open");
-      });
+    // Form: send to FormSubmit in background, then redirect to thank-you page
+    (function () {
+      const FORM_ENDPOINT = "https://formsubmit.co/officialsaksham0621@gmail.com";
+      const THANK_YOU = "thank-you.html"; // relative URL on the same repo
+      const form = document.getElementById("demo-form");
+      if (!form) return;
 
-      navMenu.addEventListener("click", (e) => {
-        if (e.target.tagName === "A") {
-          navMenu.classList.remove("open");
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+
+        const formData = new FormData(form);
+
+        // add metadata if missing
+        if (!formData.get("_subject")) formData.append("_subject", "New SalonFlow AI Demo Lead");
+        if (!formData.get("_captcha")) formData.append("_captcha", "false");
+
+        try {
+          // background send to FormSubmit
+          await fetch(FORM_ENDPOINT, { method: "POST", body: formData, mode: "cors" });
+          // redirect to own thank-you page on success
+          window.location.href = THANK_YOU;
+        } catch (err) {
+          console.error("Form send error:", err);
+          alert("Could not send the form — please try again or contact us on WhatsApp.");
+          submitButton.disabled = false;
+          submitButton.textContent = "Request My Free Demo →";
         }
       });
-    }
+    })();
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    // set year
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
